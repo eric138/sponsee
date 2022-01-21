@@ -26,10 +26,24 @@
                   class="menu-row"
                 >
                   <a-col span="4" class="icon">
-                    <HomeFilled />
+                    <HomeOutlined />
                   </a-col>
                   <a-col span="12" class="icon">
                     <a-typography-text strong>Home</a-typography-text>
+                  </a-col>
+                </a-row>
+                <a-row
+                  type="flex"
+                  justify="space-around"
+                  align="middle"
+                  @click="onClick('Profile')"
+                  class="menu-row"
+                >
+                  <a-col span="4" class="icon">
+                    <UserOutlined />
+                  </a-col>
+                  <a-col span="12" class="icon">
+                    <a-typography-text strong>Profile</a-typography-text>
                   </a-col>
                 </a-row>
                 <a-row
@@ -40,7 +54,7 @@
                   class="menu-row"
                 >
                   <a-col span="4" class="icon">
-                    <QuestionCircleFilled />
+                    <QuestionCircleOutlined />
                   </a-col>
                   <a-col span="12" class="icon">
                     <a-typography-text strong>About</a-typography-text>
@@ -50,11 +64,20 @@
             </a-drawer>
           </a-col>
           <a-col :span="20">
-            <div>hello</div>
+            <a-auto-complete
+              v-model:value="value"
+              :options="options"
+              style="width: 60%"
+              placeholder="Search"
+              @select="onSelect"
+              @search="onSearch"
+            >
+              <a-input />
+            </a-auto-complete>
           </a-col>
           <a-col :span="2">
             <div class="menu-icon">
-              <UserOutlined id="menu-icon" />
+              <UserOutlined @click="profileClicked" id="menu-icon" />
             </div>
           </a-col>
         </a-row>
@@ -65,8 +88,8 @@
 
 <script>
 import {
-  HomeFilled,
-  QuestionCircleFilled,
+  HomeOutlined,
+  QuestionCircleOutlined,
   UsergroupAddOutlined,
   MenuOutlined,
   UserOutlined,
@@ -78,6 +101,22 @@ export default {
     return {
       visible: false,
       windowWidth: window.innerWidth,
+      value: "",
+      options: null,
+      allOptions: [
+        {
+          name: "test 1",
+          value: "Bob",
+        },
+        {
+          name: "test 2",
+          value: "Walter",
+        },
+        {
+          name: "test 3",
+          value: "Frank",
+        },
+      ],
     };
   },
   methods: {
@@ -90,6 +129,18 @@ export default {
     onClick(target) {
       this.visible = false;
       this.$router.push({ name: target });
+    },
+    profileClicked() {
+      this.$router.push({ name: "Profile" });
+    },
+    onSelect(value, option) {
+      console.log("onSelect", value, option);
+    },
+    onSearch() {
+      const list = this.allOptions.filter((option) =>
+        option.value.toLowerCase().includes(this.value.toLowerCase())
+      );
+      this.options = list;
     },
   },
   computed: {
@@ -132,8 +183,8 @@ export default {
     },
   },
   components: {
-    HomeFilled,
-    QuestionCircleFilled,
+    HomeOutlined,
+    QuestionCircleOutlined,
     MenuOutlined,
     UserOutlined,
   },
@@ -147,9 +198,28 @@ export default {
   border-radius: 12px;
   box-shadow: 6px 6px 6px 2px rgb(17, 0, 29, 0.4);
 }
+.ant-input {
+  border: 1px solid black;
+  border-radius: 12px;
+}
+.ant-input:focus {
+  border: 1px solid black;
+  border-radius: 12px;
+  box-shadow: 0px 0px 4px 2px rgb(17, 0, 29, 0.4);
+}
+.ant-input:hover {
+  border: 1px solid base.$primary-color;
+}
 .icon {
   font-size: 1.2rem;
   padding: 4px;
+}
+.menu-row:hover {
+  color: base.$primary-color;
+  background-color: lightslategray;
+  border: 1px solid white;
+  border-radius: 12px;
+  box-shadow: 6px 6px 6px 2px rgb(17, 0, 29, 0.4);
 }
 .menu-icon {
   font-size: 1.2rem;
