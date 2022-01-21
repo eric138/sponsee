@@ -60,6 +60,24 @@ export default {
             ],
             backgroundColor: "#56008F",
           },
+          {
+            label: "other scatter dataset",
+            data: [
+              {
+                x: 12,
+                y: 18,
+              },
+              {
+                x: 13,
+                y: 18,
+              },
+              {
+                x: 10.5,
+                y: 17,
+              },
+            ],
+            backgroundColor: "lightslategray",
+          },
         ],
       },
     };

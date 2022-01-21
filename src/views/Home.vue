@@ -1,9 +1,98 @@
 <template>
-  <div class="home">home</div>
+  <a-row type="flex" justify="space-between">
+    <a-col :span="24">
+      <a-card size="small">
+        <div id="myDiv"></div>
+      </a-card>
+    </a-col>
+  </a-row>
 </template>
 
 <script>
+import Plotly from "plotly.js-dist";
+
 export default {
   name: "Home",
+  mounted() {
+    var trace1 = {
+      type: "pointcloud",
+      mode: "markers",
+      marker: {
+        sizemin: 0.5,
+        sizemax: 100,
+        arearatio: 0,
+        color: "rgba(255, 0, 0, 0.6)",
+      },
+      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      y: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+    };
+
+    var trace2 = {
+      type: "pointcloud",
+      mode: "markers",
+      marker: {
+        sizemin: 0.5,
+        sizemax: 100,
+        arearatio: 0,
+        color: "rgba(0, 0, 255, 0.9)",
+        opacity: 0.8,
+        blend: true,
+      },
+      opacity: 0.7,
+      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      y: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    };
+
+    var trace3 = {
+      type: "pointcloud",
+      mode: "markers",
+      marker: {
+        sizemin: 0.5,
+        sizemax: 100,
+        border: {
+          color: "rgb(0, 0, 0)",
+          arearatio: 0.7071,
+        },
+        color: "green",
+        opacity: 0.8,
+        blend: true,
+      },
+      opacity: 0.7,
+      x: [3, 4.5, 6],
+      y: [9, 9, 9],
+    };
+
+    var data = [trace1, trace2, trace3];
+
+    var layout = {
+      title: "Basic Point Cloud",
+      xaxis: {
+        type: "linear",
+        range: [-2.501411175139456, 43.340777299865266],
+        autorange: true,
+      },
+      yaxis: {
+        type: "linear",
+        range: [4, 6],
+        autorange: true,
+      },
+      autosize: true,
+      showlegend: false,
+    };
+    var config = { responsive: true };
+
+    Plotly.newPlot("myDiv", data, layout, config);
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.ant-card {
+  border: 1px solid black;
+  border-radius: 12px;
+  box-shadow: 6px 6px 6px 2px rgb(17, 0, 29, 0.4);
+}
+.ant-row + .ant-row {
+  margin-top: 12px;
+}
+</style>
