@@ -15,73 +15,30 @@ export default {
   name: "Home",
   mounted() {
     var trace1 = {
-      type: "pointcloud",
+      x: [1, 2, 3, 4],
+      y: [10, 15, 13, 17],
       mode: "markers",
-      marker: {
-        sizemin: 0.5,
-        sizemax: 100,
-        arearatio: 0,
-        color: "rgba(255, 0, 0, 0.6)",
-      },
-      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      y: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+      type: "scatter",
     };
 
     var trace2 = {
-      type: "pointcloud",
-      mode: "markers",
-      marker: {
-        sizemin: 0.5,
-        sizemax: 100,
-        arearatio: 0,
-        color: "rgba(0, 0, 255, 0.9)",
-        opacity: 0.8,
-        blend: true,
-      },
-      opacity: 0.7,
-      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-      y: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      x: [2, 3, 4, 5],
+      y: [16, 5, 11, 9],
+      mode: "lines",
+      type: "scatter",
     };
 
     var trace3 = {
-      type: "pointcloud",
-      mode: "markers",
-      marker: {
-        sizemin: 0.5,
-        sizemax: 100,
-        border: {
-          color: "rgb(0, 0, 0)",
-          arearatio: 0.7071,
-        },
-        color: "green",
-        opacity: 0.8,
-        blend: true,
-      },
-      opacity: 0.7,
-      x: [3, 4.5, 6],
-      y: [9, 9, 9],
+      x: [1, 2, 3, 4],
+      y: [12, 9, 15, 12],
+      mode: "lines+markers",
+      type: "scatter",
     };
 
     var data = [trace1, trace2, trace3];
-
-    var layout = {
-      title: "Basic Point Cloud",
-      xaxis: {
-        type: "linear",
-        range: [-2.501411175139456, 43.340777299865266],
-        autorange: true,
-      },
-      yaxis: {
-        type: "linear",
-        range: [4, 6],
-        autorange: true,
-      },
-      autosize: true,
-      showlegend: false,
-    };
     var config = { responsive: true };
 
-    Plotly.newPlot("myDiv", data, layout, config);
+    Plotly.newPlot("myDiv", data, config);
   },
 };
 </script>
