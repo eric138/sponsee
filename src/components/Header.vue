@@ -220,11 +220,34 @@ export default {
   border: 1px solid white;
   border-radius: 12px;
   box-shadow: 6px 6px 6px 2px rgb(17, 0, 29, 0.4);
+  transform: translateX(8px);
+}
+.menu-row {
+  transition: transform 250ms ease-in;
 }
 .menu-icon {
   font-size: 1.2rem;
 }
 #menu-icon:hover {
   color: base.$primary-color;
+  animation-name: floating;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  33% {
+    transform: translate(0, 2px);
+  }
+  66% {
+    transform: translate(0, -2px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
 }
 </style>
